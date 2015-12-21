@@ -1,4 +1,6 @@
 package com.example.esmidth.gpsservice;
+
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,8 +14,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class GpsActivity extends Activity {
-    private Double homeLat=26.0673834d; //宿舍纬度
-    private Double homeLon=119.3119936d; //宿舍经度
+    private Double homeLat=26.0673834d;
+    private Double homeLon=119.3119936d;
     private EditText editText = null;
     private MyReceiver receiver=null;
     private final static String TAG=GpsActivity.class.getSimpleName();
@@ -25,26 +27,22 @@ public class GpsActivity extends Activity {
 
         editText=(EditText)findViewById(R.id.editText);
 
-        //判断GPS是否可用
         Log.i(TAG, UtilTool.isGpsEnabled((LocationManager)getSystemService(Context.LOCATION_SERVICE))+"");
         if(!UtilTool.isGpsEnabled((LocationManager)getSystemService(Context.LOCATION_SERVICE))){
-            Toast.makeText(this, "GSP当前已禁用，请在您的系统设置屏幕启动。", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "GSP当前无法使用", Toast.LENGTH_LONG).show();
             Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(callGPSSettingIntent);
             return;
         }
 
-        //启动服务
         startService(new Intent(this, GpsService.class));
 
-        //注册广播
         receiver=new MyReceiver();
         IntentFilter filter=new IntentFilter();
         filter.addAction("com.ljq.activity.GpsService");
         registerReceiver(receiver, filter);
     }
 
-    //获取广播数据
     private class MyReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -63,9 +61,7 @@ public class GpsActivity extends Activity {
 
     @Override
     protected void onDestroy() {
-        //注销服务
         unregisterReceiver(receiver);
-        //结束服务，如果想让服务一直运行就注销此句
         stopService(new Intent(this, GpsService.class));
         super.onDestroy();
     }

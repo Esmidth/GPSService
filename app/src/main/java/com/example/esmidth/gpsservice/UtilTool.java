@@ -1,7 +1,8 @@
 package com.example.esmidth.gpsservice;
 
 /**
- * Created by Great Esmidth on 2015/10/7.
+ * Created by Great Great Esmidth on 2015/10/7.
+ * Stay Foolish
  */
 
 import android.content.Context;

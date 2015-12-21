@@ -1,7 +1,8 @@
 package com.example.esmidth.gpsservice;
 
 /**
- * Created by Great Esmidth on 2015/10/7.
+ * Created by Great Great Esmidth on 2015/10/7.
+ * Stay Foolish
  */
 import android.app.Service;
 import android.content.Intent;
@@ -35,13 +36,10 @@ public class GpsService extends Service {
                         e.printStackTrace();
                     }
 
-                    if(gps!=null){ //当结束服务时gps为空
-                        //获取经纬度
+                    if(gps!=null){
                         Location location=gps.getLocation();
-                        //如果gps无法获取经纬度，改用基站定位获取
                         if(location==null){
                             Log.v(TAG, "gps location null");
-                            //2.根据基站信息获取经纬度
                             try {
                                 location = UtilTool.callGear(GpsService.this, cellIds);
                             } catch (Exception e) {
@@ -53,7 +51,6 @@ public class GpsService extends Service {
                             }
                         }
 
-                        //发送广播
                         Intent intent=new Intent();
                         intent.putExtra("lat", location==null?"":location.getLatitude()+"");
                         intent.putExtra("lon", location==null?"":location.getLongitude()+"");

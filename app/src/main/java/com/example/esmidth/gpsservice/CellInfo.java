@@ -1,7 +1,8 @@
 package com.example.esmidth.gpsservice;
 
 /**
- * Created by Great Esmidth on 2015/10/7.
+ * Created by Great Great Esmidth on 2015/10/7.
+ * Stay Foolish
  */
 public class CellInfo {
     /** 基站id，用来找到基站的位置 */
